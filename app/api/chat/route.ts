@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         },
         {
           role: 'system',
-          content: 'You will be provided with the name of a style of painting',
+          content: 'You will be provided with the name of a style of painting, as well as the image parameters of the painting',
         },
         {
           role: 'system',
