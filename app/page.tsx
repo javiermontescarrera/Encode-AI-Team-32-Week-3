@@ -21,7 +21,10 @@ export default function Chat() {
 
   const [state, setState] = useState({
     style: "",
-    imageSize: "medium"
+    imageSize: "medium",
+    batchSize: "1",
+    resolution: "1",
+    temperature:"0"
   }); 
 
   const handleChange = ({
@@ -142,11 +145,10 @@ export default function Chat() {
   
           <form className="bg-gray-100 p-4 rounded-lg">
             <h3 className="text-xl font-semibold mb-2">Image Generation Parameters</h3>
+  
             <div className="mb-2">
-              <label htmlFor="imageSize" className="block mb-1">Image Size:</label>
+              <label className="block mb-1">Image Size:</label>
               <select
-                id="imageSize"
-                name="imageSize"
                 value={state.imageSize}
                 onChange={handleSelectChange}
                 className="border rounded p-1"
@@ -154,6 +156,45 @@ export default function Chat() {
                 <option value="small">Small</option>
                 <option value="medium">Medium</option>
                 <option value="large">Large</option>
+              </select>
+            </div>
+
+            <div className="mb-2">
+              <label className="block mb-1">Batch Size:</label>
+              <select
+                value={state.batchSize}
+                onChange={handleSelectChange}
+                className="border rounded p-1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+
+            <div className="mb-2">
+              <label className="block mb-1">Temperature/Randomness:</label>
+              <input
+                type="number"
+                min="0"
+                max="1"
+                step="0.1"
+                value={state.temperature}
+                onChange={handleChange}
+                className="border rounded p-1"
+              />
+            </div>
+
+            <div className="mb-2">
+              <label className="block mb-1">Resolution:</label>
+              <select
+                value={state.resolution}
+                onChange={handleSelectChange}
+                className="border rounded p-1"
+              >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
               </select>
             </div>
           </form>
