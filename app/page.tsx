@@ -21,11 +21,20 @@ export default function Chat() {
 
   const [state, setState] = useState({
     style: "",
+    imageSize: "medium"
   }); 
 
   const handleChange = ({
     target: { name, value },
   }: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
+      [name]: value,
+    });
+  };
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
     setState({
       ...state,
       [name]: value,
@@ -85,7 +94,7 @@ export default function Chat() {
             {m.content}
           </div>
         ))}
-
+  
         {isLoading && (
           <div className="flex justify-end pr-4">
             <span className="animate-bounce">...</span>
@@ -94,11 +103,11 @@ export default function Chat() {
       </div>
       <div className="fixed bottom-0 w-full max-w-md">
         <div className="flex flex-col justify-center mb-2 items-center">
-          {messages.length == 0 && (
+          {messages.length === 0 && (
             <div>
               <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
                 <h3 className="text-xl font-semibold">Styles</h3>
-
+  
                 <div className="flex flex-wrap justify-center">
                   {styles.map(({ value, emoji }) => (
                     <div
@@ -130,7 +139,26 @@ export default function Chat() {
               </button>
             </div>
           )}
-          {messages.length == 2 && !isLoading && (
+  
+          <form className="bg-gray-100 p-4 rounded-lg">
+            <h3 className="text-xl font-semibold mb-2">Image Generation Parameters</h3>
+            <div className="mb-2">
+              <label htmlFor="imageSize" className="block mb-1">Image Size:</label>
+              <select
+                id="imageSize"
+                name="imageSize"
+                value={state.imageSize}
+                onChange={handleSelectChange}
+                className="border rounded p-1"
+              >
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+              </select>
+            </div>
+          </form>
+  
+          {messages.length === 2 && !isLoading && (
             <button
               className="bg-blue-500 p-2 text-white rounded shadow-xl"
               disabled={isLoading}
@@ -156,5 +184,5 @@ export default function Chat() {
         </div>
       </div>
     </div>
-  );
+  );  
 }
