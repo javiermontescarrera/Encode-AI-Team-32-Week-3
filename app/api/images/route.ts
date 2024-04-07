@@ -1,11 +1,6 @@
-import OpenAI from "openai/index.mjs";
 import { HfInference } from "@huggingface/inference";
 
 const hf = new HfInference(process.env.HUGGING_FACE_API_KEY);
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 export const runtime = "edge";
 const URL = `https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1`;
